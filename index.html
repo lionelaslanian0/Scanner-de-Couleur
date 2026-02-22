@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Scanner de Couleur</title>
+      <!-- Tailwind CSS CDN -->
+      <script src="https://cdn.tailwindcss.com"></script>
+      <!-- Google Fonts: Plus Jakarta Sans -->
+      <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+      <!-- React & ReactDOM CDN -->
+      <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+      <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+      <!-- Babel for JSX -->
+      <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+      <!-- Lucide Icons -->
+      <script src="https://unpkg.com/lucide@latest"></script>
+      
+      <script>
+                tailwind.config = {
+                              theme: {
+                                                extend: {
+                                                                      colors: {
+                                                                                                'off-white': '#F9F9F9',
+                                                                                                'charcoal': '#1A1A1A',
+                                                                                                'stitch-blue': '#135BEC',
+                                                                                                'muted-slate': '#64748B',
+                                                                      },
+                                                                      fontFamily: {
+                                                                                                sans: ['Plus Jakarta Sans', 'sans-serif'],
+                                                                      },
+                                                                      borderRadius: {
+                                                                                                'twelve': '12px',
+                                                                      }
+                                                }
+                              }
+                }
+                  </script>
+        <style>
+                  body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F9F9F9; color: #1A1A1A; }
+                  .glass-morphism { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
+                  .tab-active { color: #135BEC; }
+              </style>
+  </head>
+  <body class="flex justify-center items-start min-h-screen">
+        <div id="root" class="w-full max-w-md h-[100vh] relative overflow-hidden bg-off-white shadow-2xl flex flex-col"></div>div>
+
+        <script type="text/babel">
+                  const { useState, useEffect } = React;
+
+                  // --- Layout Component ---
+                  const Layout = ({ children, currentTab, setPage }) => {
+                                return (
+                                                  <div className="flex flex-col h-full w-full">
+                                                                        <main className="flex-1 overflow-y-auto pb-20">
+                                                                          {children}
+                                                                        </main>
+                                                    {currentTab && (
+                                                                            <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t border-gray-100 px-8 py-4 flex justify-around items-center z-50">
+                                                                                                          <button onClick={() => setPage('scanner')} className={`flex flex-col items-center ${currentTab === 'scanner' ? 'text-stitch-blue' : 'text-muted-slate'}`}>
+                                                                                                                                            <i data-lucide="camera" className="w-6 h-6"></i>
+                                                                                                                                            <span className="text-[10px] mt-1 font-medium">Scanner</span>
+                                                                                                            </button>
+                                                                                                          <button onClick={() => setPage('palettes')} className={`flex flex-col items-center ${currentTab === 'palettes' ? 'text-stitch-blue' : 'text-muted-slate'}`}>
+                                                                                                                                            <i data-lucide="grid" className="w-6 h-6"></i>
+                                                                                                                                            <span className="text-[10px] mt-1 font-medium">Mes Palettes</span>
+                                                                                                            </button>
+                                                                                                          <button onClick={() => setPage('shops')} className={`flex flex-col items-center ${currentTab === 'shops' ? 'text-stitch-blue' : 'text-muted-slate'}`}>
+                                                                                                                                            <i data-lucide="map-pin" className="w-6 h-6"></i>
+                                                                                                                                    <span className="text-[10px] mt-1 font-medium">Carte</span>
+                                                                              </button>
+                                                    </nav>
+                                                                        )}
+                                                  </div>
+                                              );
+                  };
+          
